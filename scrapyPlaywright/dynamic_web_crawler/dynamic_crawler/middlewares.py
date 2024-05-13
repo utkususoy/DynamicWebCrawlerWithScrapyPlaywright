@@ -7,7 +7,19 @@ from scrapy import signals
 
 # useful for handling different item types with a single interface
 from itemadapter import is_item, ItemAdapter
+from scrapy.http import Request
 
+# class IgnoreJsTtfMiddleware:
+#     """Middleware to drop requests to URLs ending in .js or .ttf."""
+#
+#     def process_request(self, request: Request, spider):
+#         # Check if the URL ends with .js or .ttf
+#         if request.url.endswith('.js') or request.url.endswith('.ttf'):
+#             # Log and drop the request
+#             spider.logger.info(f'Dropping request to {request.url}')
+#             return None
+#         # Otherwise, allow the request to proceed
+#         return None
 
 class DynamicCrawlerSpiderMiddleware:
     # Not all methods need to be defined. If a method is not defined,
@@ -78,6 +90,7 @@ class DynamicCrawlerDownloaderMiddleware:
         # - or return a Request object
         # - or raise IgnoreRequest: process_exception() methods of
         #   installed downloader middleware will be called
+
         return None
 
     def process_response(self, request, response, spider):

@@ -17,15 +17,20 @@ class WebSpiderSpider(scrapy.Spider):
 
     def start_requests(self) -> Iterable[Request]:
         yield scrapy.Request(
-            url="https://westwardshippingnews.com/1-3-million-overhaul-of-millbay-docks/",
+            # url="https://westwardshippingnews.com/1-3-million-overhaul-of-millbay-docks/",
+            url="https://westwardshippingnews.com/a-mega-visit-by-the-seabourn-venture/",
             # url = "https://stackoverflow.com/questions/53426322/what-is-the-shortcut-key-to-comment-multiple-lines-using-pycharm-ide",
             meta={
+                "dont_merge_cookies": True,
                 "playwright": True,
                 "playwright_include_page": True,
                 "playwright_page_methods": [
                     PageMethod("set_viewport_size", {"width": 1920, "height": 100000}),  # Set a large viewport size
                     PageMethod("evaluate", "document.body.style.zoom='0.05'"),
-                    PageMethod("wait_for_timeout", 10000), #TODO: Make it random timeout
+                    # PageMethod("wait_for_timeout", 10000), #TODO: Make it random timeout
+                    PageMethod("wait_for_selector", "body"),
+                    # PageMethod("wait_for_load_state", state="networkidle", timeout=10000),
+                    # PageMethod("wait_for_timeout", 10000),  # TODO: Make it random timeout
                     # PageMethod('wait_for_selector', 'img'),
 
                     # PageMethod("set_viewport_size", {"width": 1920, "height": 10000}),
